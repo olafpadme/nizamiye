@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Kayıtlar</h2>
+
+  {% if entries %}
+  <table class="table table-sm table-bordered ">
+   <thead>
+     <tr>
+      <th>TCKN</th>
+      <th>Geldiği Yer</th>
+      <th>Giriş</th>
+      <th>Çıkış</th>
+      <th>Düzenle</th>
+      <th>Kart No</th>
+      {# <th>Sil</th> #}
+      <th>Kaydeden</th>
+     </tr>
+   </thead>
+   <tbody>
+    {% for entry in entries %}
+    <tr>
+      <td>{{entry.tckn}}</td>
+      <td>{{entry.ziyaret}}</td>
+      <td>{{entry.giris}}</td>
+      <td>{{entry.cikis}}</td>
+      <td><a href="{% url 'edit_data' entry.pk %}"><i class="bi bi-pencil-square"></i></a></td>
+      {# <td><a href="{% url 'delete_data' entry.pk %}"><i class="bi bi-file-earmark-x"></i></a></td> #}
+      <td>{{entry.kart_no}}</td>
+      <td>{{entry.user.username}}</td>
+    </tr>
+    {% endfor %}
+   </tbody>
+  </table>
+  {% endif %}
+   <script>
+    var d = document.getElementById('girisler');
+    d.className += " active" 
+  </script>
+{% endblock %}

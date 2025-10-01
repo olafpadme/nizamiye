@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<div class="row">
+  <div class="col-12 col-md-4">
+    <h2>Yeni Giriş</h2>
+    <div class="form-group">
+      <form method="post">
+        {% csrf_token %}
+        <table>
+          {{ form.as_p }}
+        </table>
+        <button type="submit" class="form-control btn btn-primary">Kaydet</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  var d = document.getElementById("yenig");
+  d.className += " active";
+</script>
+{% endblock %}
