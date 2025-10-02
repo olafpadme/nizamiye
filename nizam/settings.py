@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nizamiye',
+    'import_export',
+    'rangefilter',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tr'
 
 TIME_ZONE = 'Europe/Istanbul'
 
@@ -130,3 +132,6 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 # Redirects after login/logout
 LOGIN_REDIRECT_URL = "list_data"  # go to list page after login
 LOGOUT_REDIRECT_URL = "login"     # go back to login after logout
+
+from import_export.formats.base_formats import XLSX
+EXPORT_FORMATS = [XLSX]

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Kayıtlar{% endblock %}
+
+{% block content %}
+<h2>Kayıtlar</h2>
+
+{% if entries %}
+<table id="myTable" class="table table-sm table-bordered">
+  <thead>
+    <tr>
+      <th>TCKN</th>
+      <th>Geldiği Yer</th>
+      <th>Giriş</th>
+      <th>Çıkış</th>
+      <th>Düzenle</th>
+      <th>Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in entries %}
+    <tr>
+      <td>{{ entry.tckn }}</td>
+      <td>{{ entry.geldigi_yer }}</td>
+      <td>{{ entry.giris }}</td>
+      <td>{{ entry.cikis }}</td>
+      <td><a href="{% url 'edit_data' entry.pk %}"><i class="bi bi-pencil-square"></i></a></td>
+      <td><a href="{% url 'delete_data' entry.id %}" class="btn btn-sm btn-danger">Sil</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Henüz kayıt bulunmamaktadır.</p>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#myTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Excel\'e Aktar'
+            }
+        ],
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+        }
+    });
+});
+</script>
+{% endblock %}
