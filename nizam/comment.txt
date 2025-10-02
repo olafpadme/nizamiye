@@ -1,0 +1,16 @@
+{% comment "Optional note" %}
+    <ul>
+      {% for entry in entries %}
+      <li>
+        <strong>{{ entry.tckn }}</strong> ({{ entry.giris|date:"Y-m-d H:i" }})
+        <br>
+        {{ entry.content|truncatewords:20 }}
+        <br>
+        <a href="{% url 'edit_data' entry.pk %}">Edit</a> | <a href="{% url 'delete_data' entry.pk %}">Delete</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+  
+    <p>No entries yet. <a href="{% url 'create_data' %}">Create one</a></p>
+{% endcomment %}
