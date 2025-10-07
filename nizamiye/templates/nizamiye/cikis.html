@@ -1,18 +1,29 @@
-{% extends "base.html" %} {% block content %}
-<div class="row">
-  <div class="col-12 col-md-4">
-    <h2>Yeni Çıkış</h2>
-    <form action="" method="post">
-      {% csrf_token %}
-      <table>
-        {{ form.as_p }}
-      </table>
-      <button type="submit" class="form-control btn btn-primary">Kaydet</button>
-    </form>
+{% extends "base.html" %} {% block content %} 
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2>Yeni Çıkış</h2>
+          <form action="" method="post">
+            {% csrf_token %}
+            <table>
+              {{ form.as_p }}
+            </table>
+            <button type="submit" class="form-control btn btn-primary">
+              Kaydet
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      <script>
+        var d = document.getElementById("yenic");
+        d.className += " active";
+      </script>
+      {% endblock %}
+    </div>
   </div>
 </div>
-<script>
-  var d = document.getElementById("yenic");
-  d.className += " active";
-</script>
-{% endblock %}

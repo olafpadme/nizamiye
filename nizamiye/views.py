@@ -70,3 +70,6 @@ def cikis(request):
     else:
         form = CikisForm()
     return render(request, "nizamiye/cikis.html", {"form": form})
+
+def index(request):
+    return redirect("list_data")
