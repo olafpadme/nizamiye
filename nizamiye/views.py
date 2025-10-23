@@ -1,11 +1,15 @@
 import sys
+from datetime import datetime, timedelta, time
+
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.utils import timezone
 from .forms import UserDataForm, CikisForm
 from .models import UserData
+
 
 @login_required
 def create_data(request):
@@ -37,9 +41,17 @@ def edit_data(request, pk):
 
 @login_required
 def list_data(request):
-    user_entries = UserData.objects.filter(user=request.user).order_by("-giris")
+    today = datetime.now().date()
+    tomorrow = today + timedelta(1)
+    today_start = datetime.combine(today, time())
+    today_end = datetime.combine(tomorrow, time())
+    user_entries = UserData.objects.filter(giris__lte=today_end, giris__gte=today_start).order_by("-giris")
     return render(request, "nizamiye/list_data.html", {"entries": user_entries})
-
+# class UserDataList(ListView):
+#     template_name = "nizamiye/list_data.html"
+#     context_object_name = "user_data_list"
+#     def get_queryset(self):
+#         return UserData.objects.filter(giris=datetime.today().date())
 
 @login_required
 def delete_data(request, pk):
